@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000"
+    tools:context=".MainActivity">
+
+    <com.gioppl.humiditysliderview.SlideView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:maxNum="100"
+        app:minNum="0"
+        app:orientation="vertical"
+        app:buttonColor="#ffffff"
+        app:lineStartColor="#ff0000"
+        app:lineEndColor="#2F03F4"
+        app:circleR="50"
+        app:divideNum="10"
+        app:markWidth="50"
+        app:markColor="#393838"
+        app:textColor="#ffffff"
+        app:colorTextSelect="#2196F3"/>
+
+</RelativeLayout>
