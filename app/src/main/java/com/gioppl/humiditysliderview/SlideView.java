@@ -205,15 +205,16 @@ public class SlideView extends View {
         int totalMarkNum = divideNum*10;//刻度总个数
         float everyMarkHeight = height / totalMarkNum;//每个的高度
         int a = 0;
+        PathMeasure pathMeasure = new PathMeasure(mPathLine, false);
+        float[] pos = new float[2];
+        float[] tan = new float[2];
+
         for (int i = 0; i < totalMarkNum; i++, a++) {
-            PathMeasure pathMeasure = new PathMeasure(mPathLine, false);
-            float[] pos = new float[2];
-            float[] tan = new float[2];
-            pathMeasure.getPosTan(pathMeasure.getLength() / totalMarkNum * i, pos, tan);
+            pathMeasure.getPosTan(height / totalMarkNum * (i+5), pos, tan);
             float x = pos[0];
             if (a != 5 && a != 10) {//一般的刻度
                 canvas.drawLine(x - markToLineMargin - normalMarkLength, i * everyMarkHeight, x -  markToLineMargin , i * everyMarkHeight, mPaintMark);
-            } else if (a == 5) {
+            } else if (a == 5) {//=5
                 canvas.drawLine(x - markToLineMargin - normalMarkLength, i * everyMarkHeight, x -  markToLineMargin, i * everyMarkHeight, mPaintMark);
             } else {//=10
                 canvas.drawLine(x - markToLineMargin - specialMarkLength, i * everyMarkHeight, x -  markToLineMargin , i * everyMarkHeight, mPaintMark);
