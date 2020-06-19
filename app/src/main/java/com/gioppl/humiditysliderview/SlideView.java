@@ -171,7 +171,6 @@ public class SlideView extends View {
         }
     }
     private void drawMark(Canvas canvas) {
-        canvas.
         int markX = 100;//刻度和圆心的x距离
         int totalMarkNum = divideNum*10;//刻度总个数
         float everyMarkHeight = height / totalMarkNum;//每个的高度
