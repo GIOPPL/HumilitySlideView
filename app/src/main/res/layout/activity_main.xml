@@ -8,6 +8,8 @@
     tools:context=".MainActivity">
 
     <com.gioppl.humiditysliderview.SlideView
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="50dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:maxNum="100"
@@ -17,10 +19,13 @@
         app:lineStartColor="#ff0000"
         app:lineEndColor="#2F03F4"
         app:circleR="50"
-        app:divideNum="10"
-        app:markWidth="50"
-        app:markColor="#393838"
+        app:divideNum="11"
+        app:markColor="#383838"
         app:textColor="#ffffff"
-        app:colorTextSelect="#2196F3"/>
+        app:colorTextSelect="#2196F3"
+        app:isRatio="true"
+        app:normalMarkLength="50"
+        app:specialMarkLength="100"
+        app:markToLineMargin="50"/>
 
 </RelativeLayout>

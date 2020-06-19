@@ -12,9 +12,12 @@
         <attr name="lineEndColor" format="color"/>
         <attr name="divideNum" format="integer"/>
         <attr name="circleR" format="integer"/>
-        <attr name="markWidth" format="integer"/>
         <attr name="markColor" format="color"/>
         <attr name="textColor" format="color"/>
         <attr name="colorTextSelect" format="color"/>
+        <attr name="isRatio" format="boolean"/>
+        <attr name="normalMarkLength" format="float"/>
+        <attr name="specialMarkLength" format="float"/>
+        <attr name="markToLineMargin" format="float"/>
     </declare-styleable>
 </resources>
