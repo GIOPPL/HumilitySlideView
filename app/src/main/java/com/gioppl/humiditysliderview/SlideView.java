@@ -44,6 +44,8 @@ public class SlideView extends View {
     private float touchY;
     private float originalY;
 
+    private String result;
+
     private int touchStatus = 0;//0为禁止，1为上滑动，2为下滑动
 
     private CircleBean btnCircle = new CircleBean(0, 0);
@@ -166,29 +168,32 @@ public class SlideView extends View {
             enlargeTail = "";
         }
         for (int i = 0; i <= totalTextNum; i++) {
+            float height=i * everyTextHeight+20;
             if (touchStatus == 0) {//静止
-                canvas.drawText(handleText(i,normalTail), 30, i * everyTextHeight, mPaintText);
+                canvas.drawText(handleText(i,normalTail), 30, height, mPaintText);
             } else if (touchStatus == 1) {//上滑动
-                if ((i * everyTextHeight) > btnCircle.y - resolutionRation && (i * everyTextHeight) < btnCircle.y + resolutionRation) {//正常绘制
+                if ((height) > btnCircle.y - resolutionRation && (height) < btnCircle.y + resolutionRation) {//正常绘制
                     //放大绘制
                     setTextPaintStyle(true);
-                    int g = (int) (btnCircle.y / everyMarkHeight);
-                    canvas.drawText(g + enlargeTail, 30, btnCircle.y, mPaintText);
+                    int g = (int) (btnCircle.y / everyMarkHeight)+2;
+                    result=g + enlargeTail;
+                    canvas.drawText(g + enlargeTail, 30, btnCircle.y+20, mPaintText);
                 } else {
                     //正常绘制
                     setTextPaintStyle(false);
-                    canvas.drawText(handleText(i,normalTail), 30, i * everyTextHeight, mPaintText);
+                    canvas.drawText(handleText(i,normalTail), 30, height, mPaintText);
                 }
             } else {//下滑动
-                if ((i * everyTextHeight) > btnCircle.y - resolutionRation && (i * everyTextHeight) < btnCircle.y + resolutionRation) {//正常绘制
+                if ((height) > btnCircle.y - resolutionRation && (height) < btnCircle.y + resolutionRation) {//正常绘制
                     //放大绘制
                     setTextPaintStyle(true);
-                    int g= (int) (btnCircle.y/everyMarkHeight);
-                    canvas.drawText(g + enlargeTail, 30, btnCircle.y, mPaintText);
+                    int g= (int) (btnCircle.y/everyMarkHeight)+2;
+                    result=g + enlargeTail;
+                    canvas.drawText(g + enlargeTail, 30, btnCircle.y+20, mPaintText);
                 } else {
                     //正常绘制
                     setTextPaintStyle(false);
-                    canvas.drawText(handleText(i,normalTail), 30, i * everyTextHeight, mPaintText);
+                    canvas.drawText(handleText(i,normalTail), 30, height, mPaintText);
                 }
             }
 
@@ -209,7 +214,7 @@ public class SlideView extends View {
         float[] pos = new float[2];
         float[] tan = new float[2];
 
-        for (int i = 0; i < totalMarkNum; i++, a++) {
+        for (int i = -2; i < totalMarkNum; i++, a++) {
             pathMeasure.getPosTan(height / totalMarkNum * (i+5), pos, tan);
             float x = pos[0];
             if (a != 5 && a != 10) {//一般的刻度
@@ -248,6 +253,14 @@ public class SlideView extends View {
             case MotionEvent.ACTION_MOVE:
                 btnCircle.y = touchY;
                 invalidate();
+                if (result!=null){
+                    if (result.charAt(result.length()-1)=='%'){
+                        result=result.substring(0,result.length()-1);
+                        scrollBack.scrollBack(Integer.parseInt(result));
+                    }else {
+                        scrollBack.scrollBack(Integer.parseInt(result));
+                    }
+                }
                 break;
             case MotionEvent.ACTION_UP:
 
@@ -256,6 +269,11 @@ public class SlideView extends View {
         return true;
     }
 
+    private ScrollCallBack scrollBack;
+
+    public void setScrollBack(ScrollCallBack scrollBack) {
+        this.scrollBack = scrollBack;
+    }
 
     public interface ScrollCallBack {
         void scrollBack(int num);
